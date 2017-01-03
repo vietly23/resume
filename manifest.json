@@ -1,0 +1,7 @@
+{
+  "name": "resume",
+  "short_name": "resume",
+  "description": "My resume ",
+  "start_url": "/",
+  "display": "standalone"
+}
