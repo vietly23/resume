@@ -3,69 +3,87 @@
 <link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <dom-module id="resume-app">
   <template>
-    <style>
-      :host {
-        display: block;
-        font-family: 'Open Sans', sans-serif;
-        color: white;
-      }
-      app-toolbar {
-        background: #009688;
-        width: auto;
-      }
+  <style>
+  :host {
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    color: black;
+  }
+  app-toolbar{
+    background: #009688;
+    width: auto;
+    color: white;
+  }
 
-      paper-tabs {
-        background: #009688;
-        padding-right: 400px;
-      }
-      .title {
-        font-weight: 700;
-        font-size: 4vh;
-        text-transform: uppercase;
-        @apply(--layout);
-        @apply(--layout-flex-auto);
-        @apply(--layout-center-center);
-      }
-    </style>
-    <app-header-layout fullbleed>
-    <app-header style="height: 400px;" fixed condenses effects="waterfall">
+  paper-tabs {
+    background: #009688;
+    padding-right: 400px;
+    color: white;
+  }
+  .title {
+    font-weight: 700;
+    font-size: 4vh;
+    text-transform: uppercase;
+    color: white
+    @apply(--layout);
+    @apply(--layout-flex-auto);
+    @apply(--layout-center-center);
+  }
+  </style>
+  <app-header-layout fullbleed>
+    <app-header fixed condenses effects="waterfall">
       <app-toolbar>
         <div main-title>Main Title</div>
       </app-toolbar>
-      <paper-tabs style="height: 64px;" selected="{{selected}}" sticky>
+      <paper-tabs selected="{{selected}}" sticky>
         <paper-tab>About Me</paper-tab>
         <paper-tab>Projects</paper-tab>
         <paper-tab>Blog</paper-tab>
       </paper-tabs>
     </app-header>
-  </app-header-layout>
-    <iron-pages selected="[[selected]]">
-      <my-view name="view1"></my-view>
+    <iron-pages selected="{{selected}}">
+      <my-view1></my-view1>
     </iron-pages>
-
     <h2>Hello [[prop1]]</h2>
-  </template>
+  </app-header-layout>
+</template>
 
-  <script>
-    Polymer({
+<script>
+Polymer({
 
-      is: 'resume-app',
+  is: 'resume-app',
 
-      properties: {
-        selected: {
-          value: 0
-        },
-        prop1: {
-          type: String,
-          value: 'resume-app',
-        },
-      },
-      observers: [],
-
-    });
-  </script>
+  properties: {
+    selected: {
+      type: Number,
+      reflectToAttribute: true,
+      observer: '_pageChanged',
+      value: 0
+    },
+    prop1: {
+      type: String,
+      value: 'resume-app',
+    },
+  },
+  observers: [],
+  _pageChanged: function(selected) {
+    // Load page import on demand. Show 404 page if fails
+    if (selected === 0) {
+      var resolvedPageUrl = this.resolveUrl('my-view1.html');
+    }
+    else {
+          var resolvedPageUrl = this.resolveUrl('404.html');
+        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+    }
+  },
+  _showPage404: function() {
+    this.page = 'view404';
+  },
+});
+</script>
 </dom-module>
