@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
@@ -47,7 +48,7 @@
       </paper-tabs>
     </app-header>
     <iron-pages selected="{{selected}}">
-      <my-view1></my-view1>
+      <my-new-view></my-new-view>
     </iron-pages>
     <h2>Hello [[prop1]]</h2>
   </app-header-layout>
@@ -73,13 +74,16 @@ Polymer({
   observers: [],
   _pageChanged: function(selected) {
     // Load page import on demand. Show 404 page if fails
-    if (selected === 0) {
-      var resolvedPageUrl = this.resolveUrl('my-view1.html');
+    console.log(selected);
+    if (selected == 0) {
+      var resolvedPageUrl = this.resolveUrl('my-new-view.html');
+      console.log(resolvedPageUrl);
+      this.importHref(resolvedPageUrl, null, null, true);
     }
     else {
-          var resolvedPageUrl = this.resolveUrl('404.html');
-        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+      var resolvedPageUrl = this.resolveUrl('404.html');
     }
+    //this.importHref(resolvedPageUrl, null, this._showPage404, true);
   },
   _showPage404: function() {
     this.page = 'view404';
