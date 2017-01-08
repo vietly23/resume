@@ -2,11 +2,14 @@
   "entrypoint": "index.html",
   "shell": "src/resume-app.html",
   "fragments": [
-    "src/my-new-view.html",
+    "src/my-view1.html",
+    "src/my-view2.html",
+    "src/my-view3.html",
     "src/my-view404.html"
   ],
-  "sources": [
+  "sourceGlobs": [
     "src/**/*",
+    "images/**/*",
     "bower.json"
   ],
   "includeDependencies": [
