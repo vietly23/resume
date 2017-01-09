@@ -36,10 +36,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       background: var(--app-primary-color);
       color: #FFF;
     }
-    app-toolbar {
-      width: auto;
-    }
     .title {
+      background: var(--app-primary-color);
       font-weight: 700;
       font-size: 30px;
       text-transform: uppercase;
@@ -51,14 +49,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
       <!-- Main content -->
       <app-header-layout fullbleed>
-        <app-header fixed condenses effects="waterfall">
-          <app-toolbar>
+        <app-header reveals condenses effects="waterfall">
+          <!-- <app-toolbar> -->
             <div class="title" main-title>Main Title</div>
-          </app-toolbar>
+          <!-- </app-toolbar> -->
           <paper-tabs
               selected="{{page}}"
               attr-for-selected="name"
-              sticky scrollable>
+              scrollable noink sticky>
             <paper-tab name="resume">About Me</paper-tab>
             <paper-tab name="projects">Projects</paper-tab>
             <paper-tab name="blog">Blog</paper-tab>
@@ -79,7 +77,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
     Polymer({
       is: 'resume-app',
-
       properties: {
         page: {
           type: String,
