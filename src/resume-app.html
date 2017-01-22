@@ -27,7 +27,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style>
     :host {
-      --app-primary-color: #009688;
+      --app-primary-color: #2196F3;
       display: block;
       font-family: 'Open Sans', sans-serif;
       color: black;
@@ -42,6 +42,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       font-size: 30px;
       text-transform: uppercase;
       color: #FFF;
+      padding-top: 20px;
       @apply(--layout);
       @apply(--layout-flex-auto);
       @apply(--layout-center-center);
@@ -89,6 +90,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _pageChanged: function(page) {
         // Load page import on demand. Show 404 page if fails
         var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+        window.scrollTo(0,0);
         this.importHref(resolvedPageUrl, null, this._showPage404, true);
       },
       _showPage404: function() {
